@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import { ListElements } from "./components/ListElements";
 import { AddNewElements } from "./components/AddNewElements";
+import { Login } from "./components/Login";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -43,17 +44,26 @@ function Frontpage() {
       <div id="nav">
         <h1 className={"h1header"}>Element Database</h1>
 
-        <p className={"p1"}>
+        <div>
           <Link to="/">Home</Link>
-        </p>
-        <p className={"p2"}>
-          <Link to="/elements">Elements</Link>
-        </p>
-        <p className={"p3"}>
-          <Link to="/elements/new">Add New Element</Link>
-        </p>
-      </div>
+        </div>
 
+        <div>
+          <Link to="/elements">Elements</Link>
+        </div>
+
+        <div>
+          <Link to="/elements/new">Add New Element</Link>
+        </div>
+
+        <div>
+          <Link to="/login">Login</Link>
+        </div>
+
+        <div>
+          <Link to="/profile">profile</Link>
+        </div>
+      </div>
       <div id="content-container"></div>
     </div>
   );
@@ -64,6 +74,10 @@ function Application() {
     <BrowserRouter>
       <Routes>
         <Route path={"/"} element={<Frontpage />} />
+        <Route path={"/login"} element={<Login />} />
+        <Route path={"/login/callback"} element={<h1>callback </h1>} />
+        <Route path={"/profile"} element={<h1>profile </h1>} />
+
         <Route path={"/elements"} element={<ListElements />} />
         <Route path={"/elements/new"} element={<AddNewElements />} />
       </Routes>
