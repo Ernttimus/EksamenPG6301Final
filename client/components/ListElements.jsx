@@ -1,6 +1,7 @@
-import { fetchJSON, useLoading } from "../index";
 import { Link } from "react-router-dom";
 import React from "react";
+import { useLoading } from "../useLoading";
+import { fetchJSON } from "../fetchJSON";
 
 function ElementCard({ elements: { title, plot, poster } }) {
   return (
