@@ -14,18 +14,20 @@ app.use(bodyParser.json());
 app.use(cookieParser(process.env.COOKIE_SECRET));
 
 app.get("/api/login", async (req, res) => {
-  const { access_token } = req.signedCookies;
-
-  const { userinfo_endpoint } = await fetchJSON(
-    "https://accounts.google.com/.well-known/openid-configuration",
-  );
-  const userinfo = await fetchJSON(userinfo_endpoint, {
-    headers: {
-      Authorization: `Bearer ${access_token}`,
-    },
-  });
-
-  res.json(userinfo);
+  try {
+    const { access_token } = req.signedCookies;
+    const { userinfo_endpoint } = await fetchJSON(
+      "https://accounts.google.com/.well-known/openid-configuration",
+    );
+    const userinfo = await fetchJSON(userinfo_endpoint, {
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+      },
+    });
+    res.json(userinfo);
+  } catch (error) {
+    res.status(401).json({ error: "" });
+  }
 });
 
 app.post("/api/login/access_token", (req, res) => {
