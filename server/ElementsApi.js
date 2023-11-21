@@ -18,14 +18,11 @@ export function ElementsApi(mongoDatabase) {
 
   router.get("/", async (req, res) => {
     const elements = await mongoDatabase
-      .collection("movies")
+      .collection("users")
       .find()
-      .map(({ title, year, plot, genre, poster }) => ({
-        title,
-        year,
-        plot,
-        genre,
-        poster,
+      .map(({ _id, email }) => ({
+        _id,
+        email,
       }))
       .limit(10)
       .toArray();

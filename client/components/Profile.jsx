@@ -1,9 +1,12 @@
 import { useLoading } from "../useLoading";
 import { fetchJSON } from "../fetchJSON";
+import { useState } from "react";
 
 export function Profile() {
-  const { loading, error, data } = useLoading(async () => {
-    return await fetchJSON("/api/login");
+  const [user, setUser] = useState("guest");
+  const { loading, error } = useLoading(async () => {
+    return setUser(await fetchJSON("/api/login"));
+    // return await fetchJSON("/api/login");
   });
 
   if (loading) {
@@ -22,10 +25,10 @@ export function Profile() {
   return (
     <div>
       <h1>
-        Profile for {data.name} ({data.email})
+        Profile for {user.name} ({user.email})
       </h1>
       <div>
-        <img src={data.picture} alt={"profile picture"} />
+        <img src={user.picture} alt={"profile picture"} />
       </div>
     </div>
   );

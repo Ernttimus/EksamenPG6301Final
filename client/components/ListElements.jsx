@@ -3,12 +3,11 @@ import React from "react";
 import { useLoading } from "../useLoading";
 import { fetchJSON } from "../fetchJSON";
 
-function ElementCard({ elements: { title, plot, poster } }) {
+function ElementCard({ elements: { _id, email } }) {
   return (
     <>
-      <h3>{title}</h3>
-      <img src={poster} alt={"Poster"} />
-      <div>{plot}</div>
+      <h3>{email}</h3>
+      <div>{_id}</div>
     </>
   );
 }
@@ -49,7 +48,7 @@ export function ListElements() {
       <div id="content-container">
         <ul>
           {data.map((elements) => (
-            <li className={"movies"} key={elements.title}>
+            <li className={"users"} key={elements._id}>
               <ElementCard elements={elements} />
             </li>
           ))}
