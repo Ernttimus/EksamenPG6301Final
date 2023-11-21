@@ -9,10 +9,8 @@ export function Callback() {
   );
 
   async function handleCallback() {
-    // Get the values returned from the login provider. For Active Directory,
-    // this will be more complex
     const { access_token } = callbackParameters;
-    await fetch("/api/login/accessToken", {
+    await fetch("/api/login/access_token", {
       method: "POST",
       body: JSON.stringify({ access_token }),
       headers: {

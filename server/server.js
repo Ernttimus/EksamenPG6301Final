@@ -7,12 +7,11 @@ import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import { fetchJSON } from "./fetchJSON.js";
 
+dotenv.config();
 const app = express();
 
-dotenv.config();
-
 app.use(bodyParser.json());
-app.use(cookieParser(process.env.COOkIE_SECRET));
+app.use(cookieParser(process.env.COOKIE_SECRET));
 
 app.get("/api/login", async (req, res) => {
   const { access_token } = req.signedCookies;
@@ -25,13 +24,23 @@ app.get("/api/login", async (req, res) => {
       Authorization: `Bearer ${access_token}`,
     },
   });
+
   res.json(userinfo);
 });
 
-app.post("/api/login", (req, res) => {
+app.post("/api/login/access_token", (req, res) => {
   const { access_token } = req.body;
   res.cookie("access_token", access_token, { signed: true });
   res.sendStatus(204);
+});
+
+app.use(express.static("../client/dist"));
+app.use((req, res, next) => {
+  if (req.method === "GET" && !req.path.startsWith("/api")) {
+    res.sendFile(path.resolve("../client/dist/index.html"));
+  } else {
+    next();
+  }
 });
 
 const mongoClient = new MongoClient(process.env.MONGODB_URL);
@@ -42,7 +51,6 @@ mongoClient.connect().then(async () => {
 });
 
 app.use(express.static("../client/dist"));
-
 app.use((req, res, next) => {
   if (req.method === "GET" && !req.path.startsWith("/api")) {
     res.sendFile(path.resolve("../client/dist/index.html"));
