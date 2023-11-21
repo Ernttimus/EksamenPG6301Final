@@ -6,6 +6,7 @@ import { AddNewElements } from "./components/AddNewElements";
 
 import { Callback } from "./components/Callback";
 import { Login } from "./components/Login";
+import { Profile } from "./components/Profile";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -32,7 +33,7 @@ function Frontpage() {
         </div>
 
         <div>
-          <Link to="/profile">profile</Link>
+          <Link to="/profile">Profile</Link>
         </div>
       </div>
       <div id="content-container"></div>
@@ -48,7 +49,7 @@ function Application() {
         <Route path={"/elements/new"} element={<AddNewElements />} />
         <Route path={"/login"} element={<Login />} />
         <Route path={"/login/callback"} element={<Callback />} />
-        <Route path={"/profile"} element={<h1>profile </h1>} />
+        <Route path={"/profile"} element={<Profile />} />
         <Route path={"/"} element={<Frontpage />} />
       </Routes>
     </BrowserRouter>

@@ -3,25 +3,28 @@ import { useNavigate } from "react-router-dom";
 
 export function Callback() {
   const navigate = useNavigate();
-  useEffect(() => {
-    async function fetchData() {
-      const { access_token } = Object.fromEntries(
-        new URLSearchParams(window.location.hash.substring(1)),
-      );
-      console.log(access_token);
 
-      await fetch("/api/login", {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify({ access_token }),
-      });
-    }
+  const callbackParameters = Object.fromEntries(
+    new URLSearchParams(window.location.hash.substring(1)),
+  );
 
+  async function handleCallback() {
+    // Get the values returned from the login provider. For Active Directory,
+    // this will be more complex
+    const { access_token } = callbackParameters;
+    await fetch("/api/login/accessToken", {
+      method: "POST",
+      body: JSON.stringify({ access_token }),
+      headers: {
+        "content-type": "application/json",
+      },
+    });
     navigate("/");
-    fetchData();
-  });
+  }
 
-  return <h1>Login callback</h1>;
+  useEffect(() => {
+    handleCallback();
+  }, []);
+
+  return <div>Please wait...</div>;
 }

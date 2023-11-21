@@ -5,17 +5,33 @@ import { MongoClient } from "mongodb";
 import dotenv from "dotenv";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
+import { fetchJSON } from "./fetchJSON.js";
 
 const app = express();
 
 dotenv.config();
 
 app.use(bodyParser.json());
-app.use(cookieParser(process.env.COOCKIE_SECRET));
+app.use(cookieParser(process.env.COOkIE_SECRET));
+
+app.get("/api/login", async (req, res) => {
+  const { access_token } = req.signedCookies;
+
+  const { userinfo_endpoint } = await fetchJSON(
+    "https://accounts.google.com/.well-known/openid-configuration",
+  );
+  const userinfo = await fetchJSON(userinfo_endpoint, {
+    headers: {
+      Authorization: `Bearer ${access_token}`,
+    },
+  });
+  res.json(userinfo);
+});
+
 app.post("/api/login", (req, res) => {
   const { access_token } = req.body;
   res.cookie("access_token", access_token, { signed: true });
-  res.sendStatus(200);
+  res.sendStatus(204);
 });
 
 const mongoClient = new MongoClient(process.env.MONGODB_URL);
