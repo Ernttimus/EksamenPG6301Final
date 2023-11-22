@@ -13,6 +13,38 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cookieParser(process.env.COOKIE_SECRET));
 
+app.post("/api/createUser", async (req, res) => {
+  const { name, email } = req.body;
+
+  console.log("Request body check:", req.body);
+
+  try {
+    const existingUser = await mongoClient
+      .db("chat_database")
+      .collection("users")
+      .findOne({ email: email });
+
+    if (existingUser) {
+      return res.status(204).json({ error: "User already exists." });
+    }
+
+    const insertResult = await mongoClient
+      .db("chat_database")
+      .collection("users")
+      .insertOne({
+        email: email,
+        name: name,
+      });
+
+    console.log("Successfully inserted user:", insertResult);
+
+    res.status(200).json({ message: "User created successfully." });
+  } catch (error) {
+    console.error("Error creating user:", error);
+    res.status(500).json({ error: "Failed to create user." });
+  }
+});
+
 app.use(async (req, res, next) => {
   const authorization = req.header("Authorization");
   if (authorization) {

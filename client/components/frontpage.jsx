@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
 import React from "react";
+import { NewUser } from "./newUserScript";
 
 export function Frontpage() {
   return (
     <div id="container">
       <div id="nav">
         <h1 className={"h1header"}>Element Database</h1>
-
+        <NewUser />
         <div>
           <Link to="/">Home</Link>
         </div>

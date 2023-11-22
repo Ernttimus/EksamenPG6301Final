@@ -12,7 +12,7 @@ function ElementCard({ elements: { _id, title } }) {
   );
 }
 
-export function ListElements() {
+export function ChatRooms() {
   const { loading, error, data } = useLoading(async () =>
     fetchJSON("/api/elements"),
   );
