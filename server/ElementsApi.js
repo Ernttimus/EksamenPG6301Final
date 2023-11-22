@@ -18,11 +18,11 @@ export function ElementsApi(mongoDatabase) {
 
   router.get("/", async (req, res) => {
     const elements = await mongoDatabase
-      .collection("users")
+      .collection("chat_rooms")
       .find()
-      .map(({ _id, email }) => ({
+      .map(({ _id, title }) => ({
         _id,
-        email,
+        title,
       }))
       .limit(10)
       .toArray();

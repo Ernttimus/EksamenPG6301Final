@@ -3,10 +3,10 @@ import React from "react";
 import { useLoading } from "../useLoading";
 import { fetchJSON } from "../fetchJSON";
 
-function ElementCard({ elements: { _id, email } }) {
+function ElementCard({ elements: { _id, title } }) {
   return (
     <>
-      <h3>{email}</h3>
+      <h3>{title}</h3>
       <div>{_id}</div>
     </>
   );
