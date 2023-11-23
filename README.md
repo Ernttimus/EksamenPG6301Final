@@ -1,6 +1,8 @@
 # EksamenPG6301Final
 * Gjøremål
 
+Heroku link: https://examapplicationpg6301-c7ad6fd6cf86.herokuapp.com/
+
 [x] Lage en app med parcel, express, concurrently, prettier
 
 [x] Sette opp fungerende React app med React Router og express Routes i egen fil
