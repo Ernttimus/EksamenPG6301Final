@@ -34,9 +34,14 @@
 
 Ting jeg ikke rakk
 
-[x] Web Sockets og chatt mellom brukere
-[x] Test coverage
+[] Web Sockets og chatt mellom brukere
+
+[] Test coverage
+
 []
+
 []
+
 []
+
 []
