@@ -1,6 +1,8 @@
 # EksamenPG6301Final
 * Gjøremål
 
+[Noe code er brukt fra forelesninger og GITHUB https://github.com/kristiania-pg6301-2023/pg6301-frontend-programming]
+
 Heroku link: https://examapplicationpg6301-c7ad6fd6cf86.herokuapp.com/
 
 [x] Lage en app med parcel, express, concurrently, prettier
