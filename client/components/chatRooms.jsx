@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import React from "react";
-import { useLoading } from "../useLoading";
+import React, { useState } from "react";
+import { useLoading, useLoading2 } from "../useLoading";
 import { fetchJSON } from "../fetchJSON";
 
 function ElementCard({ elements: { _id, title } }) {
@@ -13,9 +13,50 @@ function ElementCard({ elements: { _id, title } }) {
 }
 
 export function ChatRooms() {
-  const { loading, error, data } = useLoading(async () =>
-    fetchJSON("/api/elements"),
+  const { loading, error, data } = useLoading(
+    async () => await fetchJSON("/api/elements"),
   );
+
+  const { loading2, error2, data2 } = useLoading2(
+    async () => await fetchJSON("/api/login"),
+  );
+
+  const [newTitle, setNewTitle] = useState("");
+  const [newEmail, setNewEmail] = useState("");
+
+  const handleCreateChatRoom = async () => {
+    if (!newTitle || !newEmail) {
+      alert("Please enter both title and email");
+      return;
+    }
+
+    /*
+     body: JSON.stringify({
+          userName: data2.name,
+          emailUser: data2.email,
+          title: newTitle,
+          newEmail: newEmail,
+        }
+     */
+
+    try {
+      await fetch("/api/createUser/chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userName: data2.name,
+          emailUser: data2.email,
+          title: newTitle,
+          newEmail: newEmail,
+        }),
+      });
+      window.location.reload();
+    } catch (error) {
+      console.error("Error creating chat room:", error);
+    }
+  };
 
   if (loading) {
     return <div>loading...</div>;
@@ -32,20 +73,41 @@ export function ChatRooms() {
   return (
     <div id="container">
       <div id="nav">
-        <h1 className={"h1header"}>Element In Database</h1>
+        <h1 className={"h1header"}>Chat Mania</h1>
 
-        <p className={"p1"}>
+        <div>
           <Link to="/">Home</Link>
-        </p>
-        <p className={"p2"}>
-          <Link to="/elements">Elements</Link>
-        </p>
-        <p className={"p3"}>
-          <Link to="/elements/new">Add New Element</Link>
-        </p>
-      </div>
+        </div>
 
+        <div>
+          <Link to="/chatroom">Chat Room</Link>
+        </div>
+
+        <div>
+          <Link to="/login">Login</Link>
+        </div>
+
+        <div>
+          <Link to="/profile">Profile</Link>
+        </div>
+      </div>
       <div id="content-container">
+        <div>
+          <h2>Create New Chat Room</h2>
+          <label>Title:</label>
+          <input
+            type="text"
+            value={newTitle}
+            onChange={(e) => setNewTitle(e.target.value)}
+          />
+          <label>Email:</label>
+          <input
+            type="text"
+            value={newEmail}
+            onChange={(e) => setNewEmail(e.target.value)}
+          />
+          <button onClick={handleCreateChatRoom}>Create</button>
+        </div>
         <ul>
           {data.map((elements) => (
             <li className={"users"} key={elements._id}>

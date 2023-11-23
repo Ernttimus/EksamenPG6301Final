@@ -1,7 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ChatRooms } from "./chatRooms";
-import { AddNewElements } from "./AddNewElements";
-
+import "../style.css";
 import { Profile } from "./profile";
 import { Frontpage } from "./frontpage";
 import React from "react";
@@ -12,8 +11,7 @@ export function Application() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path={"/elements"} element={<ChatRooms />} />
-        <Route path={"/elements/new"} element={<AddNewElements />} />
+        <Route path={"/chatroom"} element={<ChatRooms />} />
         <Route path={"/login"} element={<LoginButton />} />
         <Route path={"/login/callback"} element={<NewCallback />} />
         <Route path={"/profile"} element={<Profile />} />

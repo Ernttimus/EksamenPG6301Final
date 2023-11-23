@@ -1,6 +1,8 @@
+/*
+
 import { Link } from "react-router-dom";
 import React from "react";
-
+import "../style.css";
 export function AddNewElements() {
   return (
     <div id="container">
@@ -11,7 +13,7 @@ export function AddNewElements() {
           <Link to="/">Home</Link>
         </p>
         <p className={"p2"}>
-          <Link to="/elements">Elements</Link>
+          <Link to="/chatroom">Elements</Link>
         </p>
         <p className={"p3"}>
           <Link to="/elements/new">Add New Element</Link>
@@ -27,3 +29,4 @@ export function AddNewElements() {
     </div>
   );
 }
+*/

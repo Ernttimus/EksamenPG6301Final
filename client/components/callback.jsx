@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-
+import "../style.css";
 export function NewCallback() {
   const navigate = useNavigate();
   const callbackParameters = Object.fromEntries(
