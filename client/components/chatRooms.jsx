@@ -30,15 +30,6 @@ export function ChatRooms() {
       return;
     }
 
-    /*
-     body: JSON.stringify({
-          userName: data2.name,
-          emailUser: data2.email,
-          title: newTitle,
-          newEmail: newEmail,
-        }
-     */
-
     try {
       await fetch("/api/createUser/chat", {
         method: "POST",

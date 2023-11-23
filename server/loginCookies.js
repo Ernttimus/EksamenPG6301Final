@@ -63,16 +63,12 @@ export function Users(mongoClient) {
         console.log(existingTitle2);
 
         /*
+        for the future
         const findName = (
           await mongoClient.collection("users").findOne({ email: newEmail })
         ).toString();
          */
-        /*
-        test if works
-        const existingroom = await mongoClient
-          .collection("chat_rooms")
-          .findOne({ title: "ChatRoom1" });
-*/
+
         console.log(existingTitle1 === null);
 
         if (existingTitle1 === null && existingTitle2 == null) {

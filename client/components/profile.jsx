@@ -8,7 +8,6 @@ export function Profile() {
   const [user, setUser] = useState("guest");
   const { loading, error } = useLoading(async () => {
     return setUser(await fetchJSON("/api/login"));
-    // return await fetchJSON("/api/login");
   });
 
   if (loading) {

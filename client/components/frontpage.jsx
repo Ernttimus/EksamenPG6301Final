@@ -24,7 +24,10 @@ export function Frontpage() {
           <Link to="/profile">Profile</Link>
         </div>
       </div>
-      <div id="content-container"></div>
+      <div id="content-container">
+        <h2>This is Chat Mania</h2>
+        <h3>Feel free to explore around as you want :)</h3>
+      </div>
     </div>
   );
 }
